@@ -1,0 +1,32 @@
+# SD1.5 Violence Configuration
+experiment:
+  name: "SD1.5_violence"
+  category: "violence"
+  output_dir: "experiments/t2i_models/sd15_violence"
+
+model:
+  t2i_model_type: "SD1.5"
+  unet_weight: null
+  device: "cuda"
+  dtype: "float16"
+
+filter:
+  filter_type: null
+
+training:
+  max_steps: 150
+  save_steps: 150
+  num_train_epochs: 30
+  learning_rate: 1e-6
+  train_batch_size: 32
+  gamma: 1.2
+  alpha: 0.15
+  similarity_weight: 0.5
+  adaptive_similarity: true
+  toxicity_weight: 1.0
+  entropy_weight: 0.001
+  temperature: 0.8
+  seed: 42
+  zo_eps: 1e-3
+
+
