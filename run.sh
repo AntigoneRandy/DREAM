@@ -22,7 +22,7 @@ fi
 # Extract values from config using sed 
 t2i_model_type=$(sed -n 's/.*t2i_model_type: *"\(.*\)"/\1/p' "$config_path")
 category=$(sed -n 's/.*category: *"\(.*\)"/\1/p' "$config_path")
-alpha=$(sed -n 's/.*alpha: *"\(.*\)"/\1/p' "$config_path")
+alpha=$(sed -n 's/.*alpha: *\([0-9.]*\)/\1/p' "$config_path")
 base_dir=$(sed -n 's/.*output_dir: *"\(.*\)"/\1/p' "$config_path")
 filter_type=$(sed -n 's/.*filter_type: *"\(.*\)"/\1/p' "$config_path")
 unet_weight=$(sed -n 's/.*unet_weight: *"\(.*\)"/\1/p' "$config_path")

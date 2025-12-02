@@ -184,6 +184,7 @@ class LLMGenerator:
         log_p_list = []
         batch_size_per_time = 32
 
+
         # Process instructions in batches of 32
         for start_idx in range(0, len(instructions), batch_size_per_time):
             batch_instructions = instructions[start_idx:start_idx + batch_size_per_time]
@@ -231,6 +232,9 @@ class LLMGenerator:
                     for step, token_id in enumerate(generated_ids[i]):
                         if step >= len(final_scores):
                             break
+                        token_id_int = token_id.item() if hasattr(token_id, "item") else int(token_id)
+                        if token_id_int in self.stop_token_ids:
+                            break
                         logits = final_scores[step]
                         log_prob = torch.log_softmax(logits, dim=-1)[token_id]
                         log_p += log_prob.item()
@@ -238,7 +242,6 @@ class LLMGenerator:
 
         mean_log_p = np.mean(log_p_list) if log_p_list else 0.0
         return output_texts, mean_log_p
-
 
 @dataclass
 class LLMConfig:
