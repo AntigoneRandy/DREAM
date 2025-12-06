@@ -1,5 +1,4 @@
 #!/bin/bash
-export CUDA_VISIBLE_DEVICES=6,7
 # Allow command line config path argument
 if [ $# -eq 0 ]; then
     # Default config if no argument provided

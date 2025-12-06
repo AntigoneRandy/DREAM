@@ -31,11 +31,11 @@ class DREAMArguments:
     num_train_epochs: int = 60  # Total number of training epochs
     learning_rate: float = 1e-6  # The initial learning rate for AdamW optimizer
     train_batch_size: int = 32  # Batch size for training
-    eval_batch_size: int = 128  # Batch size for evaluation during training
+    eval_batch_size: int = 64  # Batch size for evaluation during training
 
     # Optimization parameters
     zo_eps: float = 1e-3  # Zeroth-order perturbation magnitude
-    alpha: float = 0.15  # Temperature scaling parameter for prompt sampling
+    alpha: float = 0.3  # Temperature scaling parameter for prompt sampling
     gamma: float = 1.2  # Weight for historical gradients in gradient estimation
     temperature: float = 0.8  # Minimum sampling temperature during prompt generation
 
@@ -117,9 +117,9 @@ class DREAMArguments:
         num_train_epochs: int = 60
         learning_rate: float = 1e-6
         train_batch_size: int = 32
-        eval_batch_size: int = 128
+        eval_batch_size: int = 64
         gamma: float = 1.2
-        alpha: float = 0.15
+        alpha: float = 0.3
         top_k: Optional[int] = 200
         similarity_weight: float = 0.5
         adaptive_similarity: bool = True

@@ -100,7 +100,7 @@ python src/sample.py \
 ```
 
 - `--category`: Red teaming LLM training category (sexual, violence)
-- `--alpha`: Temperature scaling parameter for prompt sampling ($\alpha$ parameter from Equation (10) in Section 4.4 of the paper) default: 0.15
+- `--alpha`: Temperature scaling parameter for prompt sampling ($\alpha$ parameter from Equation (10) in Section 4.4 of the paper) default: 0.3
 - `--model_path`: Trained red teaming LLM checkpoint file path (e.g., `experiments/checkpoints/best_model`)
 - `--sample_batch_size`: Number of samples per batch, default: 32
 - `--sample_num_batches`: Number of sampling batches, default: 32 (total prompts = batch_size × num_batches)

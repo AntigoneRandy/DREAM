@@ -20,7 +20,7 @@ training:
   learning_rate: 1e-6
   train_batch_size: 32
   gamma: 1.2
-  alpha: 0.15
+  alpha: 0.3
   similarity_weight: 0.3
   adaptive_similarity: true
   toxicity_weight: 1.0
