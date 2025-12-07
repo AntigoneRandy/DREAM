@@ -123,7 +123,7 @@ class LLMGenerator:
                 tokenizer=tokenizer,
                 output_dir=args.output_dir,
                 alpha=getattr(args, 'alpha', 0.2),
-                min_temperature=0.8,
+                min_temperature=getattr(args, 'temperature', 0.8),
                 top_k=50
             )
         else:
