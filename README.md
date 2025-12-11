@@ -2,7 +2,7 @@
 
 This repository contains the official implementation for "[DREAM: Scalable Red Teaming for Text-to-Image Generative Systems via Distribution Modeling](https://arxiv.org/abs/2507.16329)" (IEEE S&P 2026).
 
-[![S&P'26](https://img.shields.io/badge/S&P'26-f1b800)](https://www.computer.org/csdl/proceedings-article/sp/2026/606500c085/2bojwDkVH0Y) [![arXiv](https://img.shields.io/badge/arXiv-2507.16329-b31b1b.svg?style=flat-square)](https://arxiv.org/abs/2507.16329) [![huggingface](https://img.shields.io/badge/Dataset-%F0%9F%A4%97-78ac62.svg?style=flat-square)](https://huggingface.co/datasets/sanowip/DREAM-Red-Teaming-Prompts)
+[![S&P'26](https://img.shields.io/badge/S&P'26-f1b800)](https://www.computer.org/csdl/proceedings-article/sp/2026/606500c085/2bojwDkVH0Y) [![arXiv](https://img.shields.io/badge/arXiv-2507.16329-b31b1b.svg?style=flat-square)](https://arxiv.org/abs/2507.16329) [![huggingface](https://img.shields.io/badge/Dataset-%F0%9F%A4%97-78ac62.svg?style=flat-square)](https://huggingface.co/datasets/DREAM-17k/DREAM-Red-Teaming-Prompts)
 
 ## Installation
 
