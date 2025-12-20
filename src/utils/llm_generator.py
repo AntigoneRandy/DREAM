@@ -128,6 +128,8 @@ class LLMGenerator:
             )
         else:
             self.logits_processor = None
+            
+        self.stop_token_ids = set([self.tokenizer.eos_token_id, self.tokenizer.pad_token_id])
 
     def generate_instruction(self, pool: List[str]) -> str:
         """
