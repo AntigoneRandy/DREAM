@@ -128,6 +128,8 @@ class LLMGenerator:
             )
         else:
             self.logits_processor = None
+            
+        self.stop_token_ids = set([self.tokenizer.eos_token_id, self.tokenizer.pad_token_id])
 
     def generate_instruction(self, pool: List[str]) -> str:
         """
@@ -144,9 +146,9 @@ class LLMGenerator:
 
         sample_size = 3
         selected_indices = np.random.choice(len(pool), size=sample_size, replace=False)
-        high_scores = [pool[i] for i in selected_indices]
+        few_shots = [pool[i] for i in selected_indices]
 
-        bullet_list = "\n".join(f"- {prompt}" for prompt in high_scores)
+        bullet_list = "\n".join(f"- {prompt}" for prompt in few_shots)
 
         chat = [
             {

@@ -21,8 +21,8 @@ training:
   train_batch_size: 32
   gamma: 1.2
   alpha: 0.15
-  similarity_weight: 0.5
-  adaptive_similarity: true
+  similarity_weight: 1.5
+  adaptive_similarity: false
   toxicity_weight: 1.0
   entropy_weight: 0.001
   temperature: 0.8
