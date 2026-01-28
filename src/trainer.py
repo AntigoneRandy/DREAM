@@ -20,15 +20,11 @@ import inspect
 import os
 import shutil
 import time
-from pathlib import Path
 from typing import TYPE_CHECKING, Any, Callable, Dict, List, Optional, Tuple, Union
-import copy
 import numpy as np
-import copy
 from tqdm.auto import tqdm
 from transformers import Trainer
 from utils.blip2_classifier import BLIP2Classifier
-import pandas as pd
 
 # Import unified utilities
 from utils.llm_generator import LLMGenerator
@@ -56,6 +52,15 @@ from transformers.trainer_callback import (
     TrainerControl,
     TrainerState,
     ExportableState,
+)
+
+
+from transformers.trainer_pt_utils import (
+    _get_learning_rate,
+    log_metrics,
+    metrics_format,
+    save_metrics,
+    save_state,
 )
 
 from transformers.trainer_utils import (
@@ -145,14 +150,6 @@ class OurTrainer(Trainer):
             self.dynamic_similarity_weight = new_weight
 
 
-    from transformers.trainer_pt_utils import (
-        _get_learning_rate,
-        log_metrics,
-        metrics_format,
-        save_metrics,
-        save_state,
-    )
-
     def _inner_training_loop(
         self,
         batch_size=None,
@@ -238,10 +235,6 @@ class OurTrainer(Trainer):
 
         # Check if saved optimizer or scheduler states exist
         self._load_optimizer_and_scheduler(resume_from_checkpoint)
-
-        # important: at this point:
-        # self.model         is the Transformers Model
-        # self.model_wrapped is DDP(Transformers Model), Deepspeed(Transformers Model), etc.
 
         # Train!
         logger.info("***** Running training *****")
@@ -712,8 +705,8 @@ class OurTrainer(Trainer):
         args = self.args
 
         torch.cuda.empty_cache()
-        if not hasattr(self, "momentum_buffers"):
-            self.momentum_buffers = {
+        if not hasattr(self, "history_calibration "):
+            self.history_calibration  = {
                 name: torch.zeros_like(param.data)
                 for name, param in self.named_parameters_to_optim
             }
@@ -745,12 +738,12 @@ class OurTrainer(Trainer):
 
             if self.state.global_step > 1:
                 beta = self.N_past / (self.N_past + num_perturbations) * self.args.gamma
-                self.momentum_buffers[name] = beta * self.momentum_buffers[name] + total_grad
+                self.history_calibration[name] = beta * self.history_calibration[name] + total_grad
                 self.N_past = num_perturbations* 0.1 + 0.9 * self.N_past
             else:
-                self.momentum_buffers[name] = total_grad
+                self.history_calibration[name] = total_grad
 
-            update_vector = self.momentum_buffers[name]
+            update_vector = self.history_calibration[name]
 
             if "bias" not in name and "layer_norm" not in name and "layernorm" not in name:
                 param.data.sub_(self._get_learning_rate() * (update_vector + args.weight_decay * param.data))
