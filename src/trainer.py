@@ -34,8 +34,6 @@ import pandas as pd
 from utils.llm_generator import LLMGenerator
 from utils.nsfw_filter import NSFWFilterManager
 
-
-
 # Integrations must be imported before ML frameworks:
 from transformers.integrations import (  # isort: split
     hp_params,
@@ -79,18 +77,12 @@ DEFAULT_PROGRESS_CALLBACK = ProgressCallback
 
 logger = logging.get_logger(__name__)
 
-
 # Name of the files used for checkpointing
 TRAINING_ARGS_NAME = "training_args.bin"
 TRAINER_STATE_NAME = "trainer_state.json"
 OPTIMIZER_NAME = "optimizer.pt"
 SCHEDULER_NAME = "scheduler.pt"
 SCALER_NAME = "scaler.pt"
-
-
-
-
-    
 
 class OurTrainer(Trainer):
     def __init__(self, llm_model, t2i_model, tokenizer, pool, *args, **kwargs):
